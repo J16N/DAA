@@ -19,14 +19,10 @@ int main(void)
     // definite profit and weight
     Item arr[n];
     
-    // Get the profits
-    for (int i = 0; i < n; ++i)
-        scanf("%f", &arr[i].profit);
-        
-    // Get the weights and calculate
-    // profit per unit weight at the same time
+    // Get the profits and the weights
+    // and calculate profit per unit weight
     for (int i = 0; i < n; ++i) {
-        scanf("%f", &arr[i].weight);
+        scanf("%f%f", &arr[i].profit, &arr[i].weight);
         arr[i].ppw = arr[i].profit / arr[i].weight;
     }
     
@@ -47,6 +43,9 @@ float fracKnapsack(int n, Item arr[n], int k_size)
     float maxProfit = 0;
     
     for (int i = 0; i < n; ++i) {
+        // if the whole item can be included into the
+        // knapsack include its profit, otherwise include
+        // only as much of the profit of as much of the item taken
         if (arr[i].weight > k_size) {
             maxProfit += (arr[i].profit * k_size / arr[i].weight);
             break;
