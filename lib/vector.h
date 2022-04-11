@@ -8,7 +8,7 @@
     } Vector;
     
     Vector *initV(void);
-    int push(Vector *, int);
-    int pop(Vector *);
+    int vpush(Vector *, int);
+    int vpop(Vector *);
     void destroyV(Vector *);
 #endif

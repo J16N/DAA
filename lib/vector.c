@@ -12,7 +12,7 @@ Vector *initV(void)
 }
 
 
-int push(Vector *v, int data)
+int vpush(Vector *v, int data)
 {
     if (v->length == v->size) {
         v->size = 2 * v->size + 1;
@@ -27,7 +27,7 @@ int push(Vector *v, int data)
 }
 
 
-int pop(Vector *v)
+int vpop(Vector *v)
 {
     int data = v->arr[--(v->length)];
     
