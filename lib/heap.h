@@ -6,4 +6,5 @@
     int heappush(Vector *, int, bool);
     int heappop(Vector *, bool);
     int heappushpop(Vector *, int, bool);
+    void decreasekey(int, int *, int);
 #endif
