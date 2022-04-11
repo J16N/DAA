@@ -7,7 +7,7 @@
         int arr[];
     } Vector;
     
-    Vector *initV(void);
+    Vector *initV(size_t);
     int vpush(Vector *, int);
     int vpop(Vector *);
     void destroyV(Vector *);

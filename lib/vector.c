@@ -2,12 +2,12 @@
 #include "./vector.h"
 
 
-Vector *initV(void)
+Vector *initV(size_t size)
 {
     Vector *v = malloc(sizeof(Vector));
-    v->size = 0;
+    v->size = size;
     v->length = 0;
-    v->arr = NULL;
+    v->arr = malloc(size * sizeof(int));
     return v;
 }
 
