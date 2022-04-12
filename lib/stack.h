@@ -3,7 +3,7 @@
     
     typedef List Stack;
     
-    Stack *initQueue(void);
+    Stack *initStack(void);
     int push(Stack *, int);
     int pop(Stack *);
     void destroyStack(Stack *);
