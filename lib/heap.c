@@ -1,81 +1,82 @@
+#include <string.h>
+#include <stdlib.h>
 #include "./heap.h"
 #include "./vector.h"
-#define MAX(a, b, arr) ((arr[(a)]) > (arr[(b)]) ? (a) : (b))
-#define MIN(a, b, arr) ((arr[(a)]) > (arr[(b)]) ? (b) : (a))
+
+void interchange(size_t, size_t, void *, size_t);
 
 
-void heapify(size_t length, int *arr, bool flag)
+void heapify(void *arr, size_t length, size_t el_size, int (*compare)(const void *, const void *))
 {
-    for (size_t i = length / 2 - 1; i >= 0; --i) {
+    for (int i = length / 2 - 1; i >= 0; --i) {
         size_t left = 2 * i + 1;
         size_t right = left + 1;
+        size_t maxIdx;
         
-        // if right node exists
-        //   if the flag is set
-        //     find the maximum of left and right
-        //   else
-        //     find the minimum of left and right
-        // else
-        //   set `idx` to only left
-        size_t idx = right < length ? 
-            flag ? MAX(left, right, arr) : 
-            MIN(left, right, arr) : left;
-        
-        if (flag && arr[i] < arr[idx])
-            interchange(i, idx, arr);
-            
-        if (!flag && arr[i] > arr[idx])
-            interchange(i, idx, arr);
+        if (right < length)
+            maxIdx = (*compare)(arr + left * el_size, arr + right * el_size) > 0 ? left : right;
+        else
+            maxIdx = left;
+          
+        if ((*compare)(arr + maxIdx * el_size, arr + i * el_size) > 0)  
+            interchange(i, maxIdx, arr, el_size);
     }
 }
 
 
-int heappush(Vector *v, int data, bool flag)
+int heappush(Vector *v, void *data, size_t data_sz, int (*compare)(const void *, const void *))
 {
-    vpush(v, data);
-    heapify(v->length, v->arr, flag);
+    vpush(v, data, data_sz);
+    heapify(v->arr, v->length, v->elem_sz, compare);
 }
 
 
-int heappop(Vector *v, bool flag)
+void *heappop(Vector *v, int (*compare)(const void *, const void *))
 {
-    interchange(0, v->length - 1, v->arr);
-    int data = vpop(v);
-    heapify(v->length, v->arr, flag);
+    interchange(0, v->length - 1, v->arr, v->elem_sz);
+    void *data = vpop(v);
+    heapify(v->arr, v->length, v->elem_sz, compare);
     return data;
 }
 
 
-int heappushpop(Vector *v, int data, bool flag)
+void *heappushpop(Vector *v, void *data, int (*compare)(const void *, const void *))
 {
-    interchange(0, v->length - 1, v->arr);
-    int temp = v->arr[v->length - 1];
-    v->arr[v->length - 1] = data;
-    heapify(v->length, v->arr, flag);
+    interchange(0, v->length - 1, v->arr, v->elem_sz);
+    
+    void *temp = malloc(v->elem_sz);
+    memcpy(temp, v->arr + (v->length - 1) * v->elem_sz, v->elem_sz);
+    memcpy(v->arr + (v->length - 1) * v->elem_sz, data, v->elem_sz);
+
+    heapify(v->arr, v->length, v->elem_sz, compare);
     return temp;
 }
 
 
-void decreasekey(size_t length, int *arr, int value, bool flag)
+/*void decreasekey(size_t length, void *arr, int value, int (*compare)(const void *, const void *))
 {
     int idx = searchkey(length, arr, value);
     
     if (idx >= 0) {
         interchange(idx, length - 1, arr);
-        heapify(length, arr, flag);
+        heapify(arr, length, sizeof(arr[0]), compare);
     }
-}
+}*/
 
 
-void interchange(int i, int j, int *arr)
+void interchange(size_t i, size_t j, void *arr, size_t el_size)
 {
-    int temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
+    void *temp = malloc(el_size);
+    
+    memcpy(temp, arr + el_size * i, el_size);
+    memcpy(arr + el_size * i, arr + el_size * j, el_size);
+    memcpy(arr + el_size * j, temp, el_size);
+    
+    free(temp);
 }
 
 
-int searchkey(size_t length, int *arr, int value)
+/*int searchkey(size_t length, int *arr, int value)
 {
     for (int i = 0; i < length / 2; ++i) {
         int left = 2 * i + 1;
@@ -89,4 +90,4 @@ int searchkey(size_t length, int *arr, int value)
     }
     
     return arr[0] == value ? 0 : -1;
-}
+}*/
