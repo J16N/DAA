@@ -8,7 +8,7 @@ void interchange(size_t, size_t, void *, size_t);
 
 void heapify(void *arr, size_t length, size_t el_size, int (*compare)(const void *, const void *))
 {
-    for (int i = length / 2 - 1; i >= 0; --i) {
+    for (long i = length / 2 - 1; i >= 0; --i) {
         size_t left = 2 * i + 1;
         size_t right = left + 1;
         size_t maxIdx;
