@@ -5,7 +5,8 @@
     typedef struct list List;
     
     struct node {
-        int data;
+        int vertex;
+        float weight;
         struct node *next;
         struct node *prev;
     };
@@ -18,7 +19,7 @@
     
     NODE *createNode(int);
     List *initList(void);
-    int insert(List *, int);
+    int insert(List *, int, float);
     int deleteHead(List *);
     int deleteTail(List *);
     int len(List *);
