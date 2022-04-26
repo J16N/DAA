@@ -2,12 +2,13 @@
 #include "./linkedList.h"
 
 
-NODE *createNode(int data)
+NODE *createNode(int v, float wt)
 {
     NODE *temp = malloc(sizeof(NODE));
     
     if (temp != NULL) {
-        temp->data = data;
+        temp->vertex = v;
+        temp->weight = wt;
         temp->next = NULL;
         temp->prev = NULL;
     }
@@ -30,10 +31,10 @@ List *initList()
 }
 
 
-int insert(List *list, int data) {
+int insert(List *list, int v, float wt) {
     if (list == NULL) return -1;
     
-    NODE *temp = createNode(data);
+    NODE *temp = createNode(v, wt);
     if (temp == NULL) return -1;
     
     if (list->nodes > 0) {
