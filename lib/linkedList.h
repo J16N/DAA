@@ -17,7 +17,6 @@
         int nodes;
     };
     
-    NODE *createNode(int);
     List *initList(void);
     int insert(List *, int, double);
     int deleteHead(List *);
