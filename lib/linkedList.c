@@ -65,7 +65,7 @@ int deleteHead(List *list)
         
     (list->nodes)--;
     
-    int data = temp->data;
+    int data = temp->vertex;
     free(temp);
     return data;
 }
@@ -85,7 +85,7 @@ int deleteTail(List *list)
     
     (list->nodes)--;
     
-    int data = temp->data;
+    int data = temp->vertex;
     free(temp);
     return data;
 }
