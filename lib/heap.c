@@ -53,15 +53,14 @@ void *heappushpop(Vector *v, void *data, int (*compare)(const void *, const void
 }
 
 
-/*void decreasekey(size_t length, void *arr, int value, int (*compare)(const void *, const void *))
+void decreaseKey(void *arr, size_t el_size, size_t i, void *value, 
+                 void (*decrease)(void *, void *),
+                 int (*compare)(const void *, const void *))
 {
-    int idx = searchkey(length, arr, value);
-    
-    if (idx >= 0) {
-        interchange(idx, length - 1, arr);
-        heapify(arr, length, sizeof(arr[0]), compare);
-    }
-}*/
+    void *el = arr + i * el_size;
+    decrease(el, value);
+    heapify(arr, i + 1, el_size, compare);
+}
 
 
 void interchange(size_t i, size_t j, void *arr, size_t el_size)
@@ -74,20 +73,3 @@ void interchange(size_t i, size_t j, void *arr, size_t el_size)
     
     free(temp);
 }
-
-
-/*int searchkey(size_t length, int *arr, int value)
-{
-    for (int i = 0; i < length / 2; ++i) {
-        int left = 2 * i + 1;
-        int right = left + 1;
-        
-        if (arr[left] == value)
-            return left;
-            
-        if (arr[right] == value)
-            return right;
-    }
-    
-    return arr[0] == value ? 0 : -1;
-}*/
