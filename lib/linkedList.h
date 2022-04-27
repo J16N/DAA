@@ -6,7 +6,7 @@
     
     struct node {
         int vertex;
-        float weight;
+        double weight;
         struct node *next;
         struct node *prev;
     };
@@ -19,7 +19,7 @@
     
     NODE *createNode(int);
     List *initList(void);
-    int insert(List *, int, float);
+    int insert(List *, int, double);
     int deleteHead(List *);
     int deleteTail(List *);
     int len(List *);

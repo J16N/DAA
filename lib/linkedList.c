@@ -2,7 +2,7 @@
 #include "./linkedList.h"
 
 
-NODE *createNode(int v, float wt)
+NODE *createNode(int v, double wt)
 {
     NODE *temp = malloc(sizeof(NODE));
     
@@ -31,16 +31,16 @@ List *initList()
 }
 
 
-int insert(List *list, int v, float wt) {
+int insert(List *list, int v, double wt) {
     if (list == NULL) return -1;
     
     NODE *temp = createNode(v, wt);
     if (temp == NULL) return -1;
     
     if (list->nodes > 0) {
-        temp->next = list->head;
-        list->head->prev = temp;
-        list->head = temp;
+        temp->prev = list->tail;
+        list->tail->next = temp;
+        list->tail = temp;
     } else {
         list->head = temp;
         list->tail = temp;
