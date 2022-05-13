@@ -1,0 +1,6 @@
+Item-7	Profit: 80.00	Weight: 2.00
+Item-5	Profit: 50.00	Weight: 1.00
+Item-4	Profit: 60.00	Weight: 2.00
+Item-1	Profit: 100.00	Weight: 5.00
+
+Total Profit: 290.00
