@@ -31,13 +31,6 @@ int main(void)
     double **dp = knapsack(n, m, bag);
     printItems(n, m, bag, dp);
     
-    /*for (size_t i = 0; i <= n; ++i) {
-        for (size_t j = 0; j <= m; ++j)
-            printf("%.2f ", dp[i][j]);
-            
-        printf("\n");
-    }*/
-    
     // free dp table
     for (size_t i = 0; i <= n; ++i)
         free(dp[i]);
