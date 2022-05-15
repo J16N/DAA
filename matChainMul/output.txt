@@ -1,0 +1,2 @@
+((A1(A2A3))A4)
+Total Operations = 58
