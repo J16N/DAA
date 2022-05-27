@@ -61,9 +61,9 @@ void mColoring(int v, int m, int n, int graph[][n], int colors[])
         
         if (v + 1 == n) {
             // print one of the solutions
-            count++;
+            printf("%02d) ", ++count);
             for (size_t i = 0; i < n; ++i)
-                printf("%02d) %c: %d\t", count, 'A' + i, colors[i]);
+                printf("%c: %d        ", 'A' + i, colors[i]);
             printf("\n");
         }
         
